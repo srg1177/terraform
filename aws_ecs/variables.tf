@@ -47,6 +47,13 @@ variable "private_subnet_cidr" {
 }
 ##############################
 
+##########INGRESS PORTS ############
+variable "ingress_ports" {
+  type    = list(number)
+  default = [80, 443, -1, 22, 0]
+}
+#######################################
+
 #########SSH KEY NAME#########
 variable "key_name" {
   type    = string
