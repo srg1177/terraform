@@ -6,29 +6,7 @@ resource "aws_lb" "ecs-lb" {
   tags = {
     "env" = "testing"
   }
-  security_groups = [aws_security_group.lb.id]
-}
-
-resource "aws_security_group" "lb" {
-  name   = "allow-all-lb"
-  vpc_id = aws_vpc.ecs_vpc.id
-
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    "env" = "testing"
-  }
+  security_groups = [aws_security_group.public_sg.id]
 }
 
 resource "aws_lb_target_group" "lb_target_group" {

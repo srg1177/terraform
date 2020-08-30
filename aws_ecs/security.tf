@@ -15,7 +15,14 @@ resource "aws_security_group" "public_sg" {
       cidr_blocks = ["0.0.0.0/0"]
     }
   }
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
+
 
 # Define the security group for private subnet
 resource "aws_security_group" "private_sg" {
@@ -33,5 +40,12 @@ resource "aws_security_group" "private_sg" {
       protocol    = "tcp"
       cidr_blocks = [var.public_subnet_cidr]
     }
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
