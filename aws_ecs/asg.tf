@@ -26,7 +26,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_grace_period = 300
   vpc_zone_identifier       = [aws_subnet.public_subnet.id]
 
-  target_group_arns     = [aws_lb_target_group.lb_target_group.arn]
+  target_group_arns     = [aws_lb_target_group.app.arn]
   protect_from_scale_in = true
 
   lifecycle {

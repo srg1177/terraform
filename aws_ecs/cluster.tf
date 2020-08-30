@@ -39,7 +39,7 @@ resource "aws_ecs_service" "service" {
     field = "cpu"
   }
   load_balancer {
-    target_group_arn = aws_lb_target_group.lb_target_group.arn
+    target_group_arn = aws_lb_target_group.app.arn
     container_name   = "example"
     container_port   = 80
   }

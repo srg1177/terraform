@@ -24,7 +24,7 @@ resource "aws_security_group" "public_sg" {
 }
 
 
-# Define the security group for private subnet
+# Traffic from public_sg
 resource "aws_security_group" "private_sg" {
   name        = "private-subnet-sg"
   description = "Allow traffic from public subnet"
