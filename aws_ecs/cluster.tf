@@ -33,6 +33,7 @@ resource "aws_ecs_task_definition" "task-definition-test" {
 resource "aws_ecs_service" "service" {
   name          = "service"
   cluster       = aws_ecs_cluster.test-cluster.id
+  task_definition = aws_ecs_task_definition.task-definition-test.arn
   desired_count = 10
   ordered_placement_strategy {
     type  = "binpack"

@@ -7,7 +7,7 @@ resource "aws_launch_configuration" "lc" {
   }
   iam_instance_profile        = aws_iam_instance_profile.ecs_service_role.name
   key_name                    = var.key_name
-  security_groups             = [aws_security_group.public_sg.id]
+  security_groups             = [aws_security_group.ec2-sg.id]
   associate_public_ip_address = true
   user_data                   = <<EOF
 #! /bin/bash
@@ -24,7 +24,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity          = 3
   health_check_type         = "ELB"
   health_check_grace_period = 300
-  vpc_zone_identifier       = [aws_subnet.public_subnet.id]
+  vpc_zone_identifier       = [aws_subnet.private_subnet.id]
 
   target_group_arns     = [aws_lb_target_group.app.arn]
   protect_from_scale_in = true

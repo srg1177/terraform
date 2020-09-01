@@ -1,3 +1,3 @@
-provider "aws" {
+provider "aws" {vekalenvekalenvekalen
   region = var.region
 }

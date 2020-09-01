@@ -6,7 +6,7 @@ resource "aws_lb" "ecs-lb" {
   tags = {
     "env" = "testing"
   }
-  security_groups = [aws_security_group.public_sg.id]
+  security_groups = [aws_security_group.lb-sg.id]
 }
 
 resource "aws_lb_target_group" "app" {

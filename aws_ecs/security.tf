@@ -1,6 +1,6 @@
-# Define the security group for public subnet
-resource "aws_security_group" "public_sg" {
-  name        = "public-subnet-sg"
+# Security group for load balancer
+resource "aws_security_group" "lb-sg" {
+  name        = "load-balancer-sg"
   description = "Allow incoming HTTP connections & SSH access"
   vpc_id      = aws_vpc.ecs_vpc.id
 
@@ -24,10 +24,10 @@ resource "aws_security_group" "public_sg" {
 }
 
 
-# Traffic from public_sg
-resource "aws_security_group" "private_sg" {
-  name        = "private-subnet-sg"
-  description = "Allow traffic from public subnet"
+# Security group form ec2
+resource "aws_security_group" "ec2-sg" {
+  name        = "ec2-sg"
+  description = "Allow traffic from load balancer"
   vpc_id      = aws_vpc.ecs_vpc.id
 
 
