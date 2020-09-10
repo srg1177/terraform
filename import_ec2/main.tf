@@ -13,12 +13,27 @@ resource "aws_instance" "Ubuntu" {
   }
 }
 
-resource "aws_instance" "m_Amazon" {
-  ami           = "ami-0bdcc6c05dec346bf"
-  instance_type = "t2.micro"
-  tags = {
-    Name    = "Amazon Linux"
-    Owner   = "Sargis"
-    Project = "Terrafrom"
+resource "aws_eip" "static_one" {
+  vpc = true
+
+}
+
+resource "aws_eip_association" "EIP_ass" {
+  instance_id = aws_instance.Ubuntu.id
+  allocation_id = aws_eip.static_one.id
+}
+
+
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_tls"
+  description = "Allow TLS inbound traffic"
+
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [aws_eip.static_one.public_ip]
   }
+
 }
